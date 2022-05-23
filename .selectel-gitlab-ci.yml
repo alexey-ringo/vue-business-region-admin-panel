@@ -1,0 +1,73 @@
+---
+include:
+  - "https://git.adm.selectel.org/pub/mirror/-/raw/master/pull.yml"
+  - "https://git.adm.selectel.org/pub/linkages/-/raw/master/complete_ci/werf_and_helm.yml"
+
+variables:
+  MIRROR_SOURCE_URL: "https://oauth2:${MIRROR_TOKEN}@gitlab.agimagroup.ru/rehau/frontend-admin.git"
+  # HELM_RELEASE: $CI_PROJECT_NAME
+  HELM_CHART: $CI_PROJECT_DIR/deployments/map-frontend-admin
+  WERF_IMAGES_REPO: "hub.adm.selectel.org/rehau/map-frontend-admin"
+
+
+# LINT
+werf-lint:
+  except:
+    variables:
+      - $ONLY_MIRROR == 'true'
+
+# BUILD
+werf-build-master:
+  variables:
+    WERF_TAG_BY_STAGES_SIGNATURE: "true"
+    WERF_TAG_GIT_BRANCH: latest
+    WERF_TAG_CUSTOM_TAG1: "$CI_COMMIT_SHA"
+  except:
+    variables:
+      - $ONLY_MIRROR == 'true'
+
+werf-build-staging:
+  except:
+    variables:
+      - $ONLY_MIRROR == 'true'
+
+werf-build-tags:
+  only: [never] # disabled until add dependencies
+  except:
+    variables:
+      - $ONLY_MIRROR == 'true'
+
+# DEPLOY
+helm-deploy-master:
+  only: [never] # disabled until add dependencies
+  variables:
+    HELM_NS: prod
+    HELM_ARGS: '--wait --atomic --debug --timeout 3m --set-string image.tag=$CI_COMMIT_SHA'
+  tags: [rehau-k8s-prod]
+  except:
+    variables:
+      - $ONLY_MIRROR == 'true'
+
+helm-deploy-staging:
+  # only: [never] # disabled until add dependencies
+  variables:
+    HELM_NS: map-stage
+    HELM_VALUES: $CI_PROJECT_DIR/deployments/map-frontend-admin/values.stage.yaml
+    HELM_ARGS: '--wait --atomic --debug --timeout 2m --set-string image.tag=$CI_COMMIT_SHA'
+  tags: [rehau-k8s-map-stage]
+  except:
+    variables:
+      - $ONLY_MIRROR == 'true'
+
+# CLEANUP
+werf-cleanup-master:
+  needs: ["werf-build-master"]
+  except:
+    variables:
+      - $ONLY_MIRROR == 'true'
+
+werf-cleanup-staging:
+  needs: ["werf-build-staging"]
+  except:
+    variables:
+      - $ONLY_MIRROR == 'true'

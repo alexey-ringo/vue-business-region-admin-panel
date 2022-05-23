@@ -1,0 +1,38 @@
+project: map-frontend-admin
+configVersion: 1
+---
+artifact: frontend-build
+from: node:12.18.4-alpine
+mount:
+  - from: build_dir
+    to: /build/node_modules
+shell:
+  install:
+    - cd /build
+    - yarn
+  beforeSetup:
+    - cd /build
+    - yarn run build
+git:
+  - add: /
+    to: /build
+    excludePaths:
+      - '**/*.md'
+      - 'deployments'
+    stageDependencies:
+      install:
+        - 'package.json'
+        - 'package-lock.json'
+        - 'yarn.lock'
+      beforeSetup:
+        - 'src'
+        - 'public'
+        - '*.js'
+---
+image: map-frontend-admin
+from: nginx:1.19-alpine
+import:
+  - artifact: frontend-build
+    add: /build/dist
+    to: /usr/share/nginx/html/
+    after: setup

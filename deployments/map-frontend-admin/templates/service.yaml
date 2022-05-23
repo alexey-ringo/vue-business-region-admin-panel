@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "map-frontend-admin.fullname" . }}
+  labels:
+    {{- include "map-frontend-admin.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "map-frontend-admin.selectorLabels" . | nindent 4 }}

@@ -1,0 +1,14 @@
+.g-container {
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 15px;
+  margin: auto;
+}
+
+.full-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: 600px;
+}

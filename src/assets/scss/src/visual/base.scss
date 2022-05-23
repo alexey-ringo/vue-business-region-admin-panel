@@ -1,0 +1,177 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  color: #000000;
+  font-size: 18px;
+  line-height: 24px;
+  font-family: 'Brix Sans', sans-serif;
+  margin: 0;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: #000000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+}
+
+select {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+}
+
+button {
+  border: none;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.btn {
+  position: relative;
+  padding: 13px;
+
+  &-login {
+    padding: 13px 40px 13px 13px;
+  }
+
+  &-email {
+    padding: 13px 40px 13px 13px;
+  }
+
+  &-green {
+    background: #37A58C;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &-gray {
+    background: #4E4E4E;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &-gray-border {
+    background: transparent;
+    border: 1px solid #4E4E4E;
+  }
+}
+
+.btn-wrapp {
+  display: flex;
+}
+
+.pink {
+  color: #DD0060;
+}
+
+/*TODO: select*/
+.form-select {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  margin-bottom: 5px;
+}
+
+.el-select .el-input__suffix {
+  background: #000000 !important;
+}
+
+.el-select .el-input .el-select__caret {
+  color: #FFFFFF !important;
+  font-size: 20px;
+}
+
+.el-select .el-select__caret {
+  color: #FFFFFF !important;
+  font-size: 20px;
+}
+
+.el-select .el-icon-arrow-up:before {
+  color: #FFFFFF !important;
+  font-size: 20px;
+}
+
+.el-select .el-input__prefix, .el-input__suffix {
+  color: #FFFFFF !important;
+  right: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.el-select .el-input__suffix {
+  color: #FFFFFF !important;
+  right: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.el-select .el-input__inner {
+  padding-left: 10px !important;
+  padding-right: 0 !important;
+  border-radius: 0 !important;
+  font-size: 18px !important;
+  color: #000000 !important;
+  line-height: 24px !important;
+}
+
+.el-select .el-input.is-focus .el-input__inner {
+  border-color: #000000 !important;
+}
+
+.el-select .el-input__inner:focus {
+  border-color: #000000 !important;
+}
+
+.el-select-dropdown__list {
+  padding: 0 !important;
+}
+
+.el-select-dropdown__item {
+  padding: 10px !important;
+  height: auto !important;
+  color: #000000 !important;
+}
+
+.el-select-dropdown__item.hover, .el-select-dropdown__item:hover {
+  background: #37A58C !important;
+  color: #FFFFFF !important;
+}

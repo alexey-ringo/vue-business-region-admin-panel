@@ -1,0 +1,27 @@
+.settings {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 15px 0 15px;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000000;
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+}
